@@ -31,7 +31,7 @@ export default function Home() {
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 16px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '64px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'linear-gradient(135deg, #22c55e, #16a34a)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'linear-gradient(135deg, #a855f7, #16a34a)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <span style={{ color: 'black', fontWeight: 700, fontSize: '14px' }}>M</span>
               </div>
               <span style={{ fontWeight: 600, fontSize: '18px', letterSpacing: '-0.02em' }}>Mukon Perps</span>
@@ -42,7 +42,7 @@ export default function Home() {
               <a href="#about" style={{ color: '#a1a1aa', fontSize: '14px', textDecoration: 'none' }}>About</a>
             </div>
             <div>
-              {mounted && <WalletMultiButton style={{ backgroundColor: '#22c55e', color: 'black', fontWeight: 600, borderRadius: '8px', border: 'none', padding: '8px 16px', cursor: 'pointer', fontSize: '14px', height: '36px' }} />}
+              {mounted && <WalletMultiButton style={{ backgroundColor: '#a855f7', color: 'black', fontWeight: 600, borderRadius: '8px', border: 'none', padding: '8px 16px', cursor: 'pointer', fontSize: '14px', height: '36px' }} />}
             </div>
           </div>
         </div>
@@ -51,8 +51,8 @@ export default function Home() {
       {/* Hero */}
       <section style={{ paddingTop: '128px', paddingBottom: '80px', paddingLeft: '16px', paddingRight: '16px' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', textAlign: 'center' }} className="stagger-children">
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '4px 12px', borderRadius: '9999px', backgroundColor: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.2)', color: '#22c55e', fontSize: '12px', fontWeight: 500, marginBottom: '24px' }}>
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#22c55e' }} className="animate-pulse-glow"></span>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '4px 12px', borderRadius: '9999px', backgroundColor: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.2)', color: '#a855f7', fontSize: '12px', fontWeight: 500, marginBottom: '24px' }}>
+            <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#a855f7' }} className="animate-pulse-glow"></span>
             Live on Solana Devnet
           </div>
           <h1 style={{ fontSize: 'clamp(36px, 8vw, 72px)', fontWeight: 700, letterSpacing: '-0.03em', marginBottom: '24px' }}>
@@ -64,7 +64,7 @@ export default function Home() {
             Trade perpetual futures with true privacy. No admin keys. Fully on-chain pricing. Built on Solana.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', justifyContent: 'center' }}>
-            <a href="/trade" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 24px', backgroundColor: '#22c55e', color: 'black', fontWeight: 600, borderRadius: '8px', textDecoration: 'none', transition: 'all 0.2s' }}>
+            <a href="/trade" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 24px', backgroundColor: '#a855f7', color: 'black', fontWeight: 600, borderRadius: '8px', textDecoration: 'none', transition: 'all 0.2s' }}>
               Start Trading <ChevronRight size={16} />
             </a>
             <a href="#markets" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 24px', backgroundColor: '#18181b', border: '1px solid #27272a', color: 'white', fontWeight: 500, borderRadius: '8px', textDecoration: 'none' }}>
@@ -79,7 +79,7 @@ export default function Home() {
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '32px' }}>
             <h2 style={{ fontSize: '24px', fontWeight: 600 }}>Live Markets</h2>
-            <a href="/markets" style={{ color: '#22c55e', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '4px', textDecoration: 'none' }}>
+            <a href="/markets" style={{ color: '#a855f7', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '4px', textDecoration: 'none' }}>
               View all <ChevronRight size={12} />
             </a>
           </div>
@@ -88,7 +88,7 @@ export default function Home() {
               <a key={market.symbol} href={`/trade/${market.symbol}`} style={{ padding: '16px', backgroundColor: '#111113', border: '1px solid #27272a', borderRadius: '12px', textDecoration: 'none', transition: 'all 0.2s' }} className="animate-slide-up">
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
                   <span style={{ fontWeight: 600 }}>{market.symbol}</span>
-                  <span style={{ fontSize: '12px', fontFamily: 'monospace', color: market.long ? '#22c55e' : '#ef4444' }}>{market.change}</span>
+                  <span style={{ fontSize: '12px', fontFamily: 'monospace', color: market.long ? '#a855f7' : '#ef4444' }}>{market.change}</span>
                 </div>
                 <div style={{ color: '#71717a', fontSize: '14px' }}>{market.name}</div>
                 <div style={{ fontFamily: 'monospace', fontSize: '18px', marginTop: '4px' }}>${market.price}</div>
@@ -109,7 +109,7 @@ export default function Home() {
             {features.map((feature, i) => (
               <div key={feature.title} style={{ padding: '24px', backgroundColor: '#0a0a0b', border: '1px solid #27272a', borderRadius: '16px', transition: 'all 0.2s' }} className="animate-slide-up">
                 <div style={{ width: '48px', height: '48px', borderRadius: '12px', backgroundColor: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
-                  <feature.icon size={24} color="#22c55e" />
+                  <feature.icon size={24} color="#a855f7" />
                 </div>
                 <h3 style={{ fontWeight: 600, fontSize: '18px', marginBottom: '8px' }}>{feature.title}</h3>
                 <p style={{ color: '#71717a', fontSize: '14px' }}>{feature.description}</p>
@@ -123,7 +123,7 @@ export default function Home() {
       <footer style={{ padding: '48px 16px', borderTop: '1px solid #27272a' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '24px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '24px', height: '24px', borderRadius: '6px', backgroundColor: '#22c55e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '24px', height: '24px', borderRadius: '6px', backgroundColor: '#a855f7', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <span style={{ color: 'black', fontWeight: 700, fontSize: '12px' }}>M</span>
             </div>
             <span style={{ color: '#71717a', fontSize: '14px' }}>Mukon Labs © 2026</span>
