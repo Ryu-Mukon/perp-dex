@@ -3,6 +3,12 @@
 import { useState } from 'react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { TrendingUp, Settings, Zap, Bell, Search } from 'lucide-react';
+import dynamic from 'next/dynamic';
+
+const Chart = dynamic(() => import('@/components/Chart'), { 
+  ssr: false,
+  loading: () => <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#71717a' }}>Loading chart...</div>
+});
 
 const orderBook = {
   bids: [
@@ -107,7 +113,7 @@ export default function TradePage() {
             </div>
             <button style={{ padding: '8px', background: 'none', border: 'none', cursor: 'pointer' }}><Bell size={16} color="#71717a" /></button>
             <button style={{ padding: '8px', background: 'none', border: 'none', cursor: 'pointer' }}><Settings size={16} color="#71717a" /></button>
-            <WalletMultiButton style={{ backgroundColor: '#22c55e', color: 'black', fontWeight: 600, borderRadius: '8px', border: 'none', padding: '6px 16px', cursor: 'pointer', fontSize: '14px' }} />
+            <WalletMultiButton style={{ backgroundColor: '#22c55e', color: 'black', fontWeight: 600, borderRadius: '8px', border: 'none', padding: '6px 16px', cursor: 'pointer', fontSize: '14px', height: '36px' }} />
           </div>
         </header>
 
@@ -120,11 +126,8 @@ export default function TradePage() {
               <button style={{ padding: '4px 12px', background: 'none', color: '#71717a', fontSize: '12px', border: 'none', cursor: 'pointer' }}>Depth</button>
               <button style={{ padding: '4px 12px', background: 'none', color: '#71717a', fontSize: '12px', border: 'none', cursor: 'pointer' }}>Funding</button>
             </div>
-            <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #0a0a0b, #111113)' }}>
-              <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '64px', fontWeight: 700, fontFamily: 'monospace', marginBottom: '8px' }}>$67,234</div>
-                <div style={{ color: '#22c55e', fontSize: '18px' }}>+2.34% (24h)</div>
-              </div>
+            <div style={{ flex: 1 }}>
+              <Chart />
             </div>
             {/* Trades */}
             <div style={{ height: '192px', borderTop: '1px solid #27272a' }}>

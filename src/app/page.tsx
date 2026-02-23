@@ -42,7 +42,7 @@ export default function Home() {
               <a href="#about" style={{ color: '#a1a1aa', fontSize: '14px', textDecoration: 'none' }}>About</a>
             </div>
             <div>
-              {mounted && <WalletMultiButton style={{ backgroundColor: '#22c55e', color: 'black', fontWeight: 600, borderRadius: '8px', border: 'none', padding: '8px 16px', cursor: 'pointer' }} />}
+              {mounted && <WalletMultiButton style={{ backgroundColor: '#22c55e', color: 'black', fontWeight: 600, borderRadius: '8px', border: 'none', padding: '8px 16px', cursor: 'pointer', fontSize: '14px', height: '36px' }} />}
             </div>
           </div>
         </div>
