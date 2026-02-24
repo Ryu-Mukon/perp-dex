@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
-import { TrendingUp, Settings, Zap, Bell, Search, ChevronDown } from 'lucide-react';
+import { TrendingUp, Settings, Zap, Bell, Search, ChevronDown, Wallet } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import { useSolana } from '@/hooks/useSolana';
 
 const Chart = dynamic(() => import('@/components/Chart'), { 
   ssr: false,
@@ -38,7 +39,7 @@ const orderBook = {
 };
 
 const positions = [
-  { symbol: 'BTC', side: 'long', size: '0.5', entry: '65,400', mark: '67,234', pnl: '+917', pnlPct: '+2.80%', sidePnl: true },
+  // Will be fetched from chain
 ];
 
 const trades = [
@@ -66,6 +67,18 @@ export default function TradePage() {
   const [side, setSide] = useState<'buy' | 'sell'>('buy');
   const [selectedMarket, setSelectedMarket] = useState(markets[0]);
   const [showMarketDropdown, setShowMarketDropdown] = useState(false);
+  
+  const { publicKey, connected, balance, fetchBalance } = useSolana();
+
+  useEffect(() => {
+    if (connected) {
+      fetchBalance();
+    }
+  }, [connected, fetchBalance]);
+
+  const formatAddress = (addr: string) => {
+    return `${addr.slice(0, 4)}...${addr.slice(-4)}`;
+  };
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#0a0a0b', display: 'flex', flexDirection: 'column' }}>
@@ -141,6 +154,27 @@ export default function TradePage() {
         </div>
         
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          {/* Wallet Info */}
+          {connected && publicKey && (
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '8px',
+              padding: '6px 12px',
+              backgroundColor: '#18181b',
+              borderRadius: '8px',
+              border: '1px solid #1f1f23',
+            }}>
+              <Wallet size={14} color="#a855f7" />
+              <span style={{ fontSize: '12px', color: '#a1a1aa', fontFamily: 'monospace' }}>
+                {formatAddress(publicKey.toBase58())}
+              </span>
+              <span style={{ fontSize: '12px', color: '#a855f7', fontFamily: 'monospace' }}>
+                {balance.toFixed(3)} SOL
+              </span>
+            </div>
+          )}
+          
           <div style={{ display: 'flex', alignItems: 'center', gap: '4px', padding: '6px 12px', backgroundColor: '#18181b', borderRadius: '8px', border: '1px solid #1f1f23' }}>
             <Zap size={16} color="#a855f7" />
             <span style={{ fontSize: '14px' }}>Funding: <span style={{ color: '#a855f7' }}>0.01%</span></span>
@@ -239,8 +273,22 @@ export default function TradePage() {
                 ))}
               </div>
             </div>
-            <button style={{ width: '100%', padding: '12px', borderRadius: '8px', fontWeight: 600, fontSize: '14px', border: 'none', cursor: 'pointer', backgroundColor: side === 'buy' ? '#22c55e' : '#ef4444', color: side === 'buy' ? 'black' : 'white' }}>
-              {side === 'buy' ? 'Buy / Long BTC-PERP' : 'Sell / Short BTC-PERP'}
+            <button 
+              disabled={!connected}
+              style={{ 
+                width: '100%', 
+                padding: '12px', 
+                borderRadius: '8px', 
+                fontWeight: 600, 
+                fontSize: '14px', 
+                border: 'none', 
+                cursor: connected ? 'pointer' : 'not-allowed',
+                backgroundColor: !connected ? '#27272a' : (side === 'buy' ? '#22c55e' : '#ef4444'), 
+                color: !connected ? '#71717a' : (side === 'buy' ? 'black' : 'white'),
+                opacity: !connected ? 0.5 : 1
+              }}
+            >
+              {!connected ? 'Connect Wallet' : (side === 'buy' ? 'Buy / Long BTC-PERP' : 'Sell / Short BTC-PERP')}
             </button>
           </div>
 
@@ -248,8 +296,15 @@ export default function TradePage() {
           <div style={{ flex: 1, padding: '16px', overflowY: 'auto' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
               <span style={{ fontWeight: 500, fontSize: '14px', color: 'white' }}>Positions</span>
-              <span style={{ fontSize: '12px', color: '#71717a' }}>1 open</span>
+              <span style={{ fontSize: '12px', color: '#71717a' }}>{positions.length} open</span>
             </div>
+            
+            {positions.length === 0 && (
+              <div style={{ textAlign: 'center', padding: '24px 0', color: '#71717a', fontSize: '13px' }}>
+                No open positions
+              </div>
+            )}
+            
             {positions.map((pos) => (
               <div key={pos.symbol} style={{ padding: '12px', backgroundColor: '#18181b', border: '1px solid #1f1f23', borderRadius: '8px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
