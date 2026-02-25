@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { TrendingUp, Settings, Zap, Bell, Search, ChevronDown, Wallet } from 'lucide-react';
 import dynamic from 'next/dynamic';
@@ -38,9 +38,7 @@ const orderBook = {
   ],
 };
 
-const positions = [
-  // Will be fetched from chain
-];
+const positions: any[] = [];
 
 const trades = [
   { price: '67,235', size: '0.12', time: '10:42:35', side: 'sell' },
@@ -68,17 +66,7 @@ export default function TradePage() {
   const [selectedMarket, setSelectedMarket] = useState(markets[0]);
   const [showMarketDropdown, setShowMarketDropdown] = useState(false);
   
-  const { publicKey, connected, balance, fetchBalance } = useSolana();
-
-  useEffect(() => {
-    if (connected) {
-      fetchBalance();
-    }
-  }, [connected, fetchBalance]);
-
-  const formatAddress = (addr: string) => {
-    return `${addr.slice(0, 4)}...${addr.slice(-4)}`;
-  };
+  const { publicKey, connected, balance, formatAddress } = useSolana();
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#0a0a0b', display: 'flex', flexDirection: 'column' }}>
@@ -167,7 +155,7 @@ export default function TradePage() {
             }}>
               <Wallet size={14} color="#a855f7" />
               <span style={{ fontSize: '12px', color: '#a1a1aa', fontFamily: 'monospace' }}>
-                {formatAddress(publicKey.toBase58())}
+                {formatAddress}
               </span>
               <span style={{ fontSize: '12px', color: '#a855f7', fontFamily: 'monospace' }}>
                 {balance.toFixed(3)} SOL
